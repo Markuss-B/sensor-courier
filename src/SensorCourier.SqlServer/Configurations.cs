@@ -13,12 +13,12 @@ namespace SensorCourier.SqlServer.Configurations
         /// <param name="modelBuilder"></param>
         public static void ConfigureModelBuilder(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SensorMeasurement>()
-                .Property(e => e.MeasurementsJson)
-                .HasColumnType("NVARCHAR(MAX)");
-            modelBuilder.Entity<SensorMetadata>()
-                .Property(e => e.MetadataJson)
-                .HasColumnType("NVARCHAR(MAX)");
+            //modelBuilder.Entity<SensorMeasurement>()
+            //    .Property(e => e.MeasurementsJson)
+            //    .HasColumnType("NVARCHAR(MAX)");
+            //modelBuilder.Entity<SensorMetadata>()
+            //    .Property(e => e.MetadataJson)
+            //    .HasColumnType("NVARCHAR(MAX)");
         }
     }
 }

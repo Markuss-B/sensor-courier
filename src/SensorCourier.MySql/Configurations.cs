@@ -13,12 +13,12 @@ namespace SensorCourier.MySql.Configurations
         /// <param name="modelBuilder"></param>
         public static void ConfigureModelBuilder(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<SensorMeasurement>()
-                .Property(e => e.MeasurementsJson)
-                .HasColumnType("JSON");
-            modelBuilder.Entity<SensorMetadata>()
-                .Property(e => e.MetadataJson)
-                .HasColumnType("JSON");
+            //modelBuilder.Entity<SensorMeasurement>()
+            //    .Property(e => e.MeasurementsJson)
+            //    .HasColumnType("JSON");
+            //modelBuilder.Entity<SensorMetadata>()
+            //    .Property(e => e.MetadataJson)
+            //    .HasColumnType("JSON");
         }
     }
 }

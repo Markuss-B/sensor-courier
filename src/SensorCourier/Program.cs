@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using SensorCourier.App;
 using SensorCourier.App.Data;
+using SensorCourier.App.Models;
 using SensorCourier.App.Services;
 using SensorCourier.Models;
 using SensorCourier.MySql.Extensions;
+using SensorCourier.SqlServer.Extensions;
 using static SensorCourier.App.Provider;
 
 var builder = Host.CreateApplicationBuilder(args);
@@ -28,6 +30,7 @@ builder.Services.AddDbContext<TargetDbContext>(options =>
             config.GetConnectionString(SqlServer.Name)!,
             x => x.MigrationsAssembly(SqlServer.Assembly)
         );
+        options.UseSqlServerExtensions();
     }
     // MySql
     else if (provider == MySql.Name)
@@ -41,10 +44,17 @@ builder.Services.AddDbContext<TargetDbContext>(options =>
     }   
 });
 
-// Services
+//MongoDb
+builder.Services.Configure<MongoDbSettings>(config.GetSection("MongoDbSettings"));
+builder.Services.AddSingleton<MongoDb>();
+
+// Repositories
 builder.Services.AddScoped<ExtractionRepository>();
 builder.Services.AddScoped<LoadRepository>();
+
+// Services
 builder.Services.AddScoped<ETLService>();
+builder.Services.AddSingleton<ParameterService>();
 
 builder.Services.AddHostedService<Worker>();
 
