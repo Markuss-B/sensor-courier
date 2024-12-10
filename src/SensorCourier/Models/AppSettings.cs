@@ -11,7 +11,6 @@ public class AppSettings
 {
     public double BatchDelaySeconds { get; set; }
     public int BatchSize { get; set; }
-    public bool Monitor { get; set; }
 
     public static readonly PropertyInfo[] PropertyInfos = typeof(AppSettings).GetProperties();
     public static readonly string[] PropertyNames = PropertyInfos.Select(p => p.Name).ToArray();

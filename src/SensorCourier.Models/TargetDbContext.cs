@@ -39,9 +39,7 @@ public class TargetDbContext : DbContext
 
         db.Parameters.AddRange(
             new Parameter { Name = "BatchDelaySeconds", Value = "60" },
-            new Parameter { Name = "BatchSize", Value = "10" },
-            new Parameter { Name = "LastDateTime", Value = "" },
-            new Parameter { Name = "Monitor", Value = "false" }
+            new Parameter { Name = "BatchSize", Value = "10" }
         );
 
         await db.SaveChangesAsync();
