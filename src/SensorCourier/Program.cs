@@ -71,8 +71,9 @@ try
     logger.LogInformation("Attempting to connect to the database.");
 
     var db = services.GetRequiredService<TargetDbContext>();
-    db.Database.CanConnect();
+    await db.Database.OpenConnectionAsync();
     logger.LogInformation("Successfully connected to the database.");
+    await db.Database.CloseConnectionAsync();
 
     await TargetDbContext.InitializeAsync(db, logger);
 
