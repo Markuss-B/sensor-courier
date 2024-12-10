@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35521.163
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorCourier.App", "src\SensorCourier\SensorCourier.App.csproj", "{944E2BA8-3D23-43A7-85B9-DE55C98328DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorCourier.SqlServer", "src\SensorCourier.SqlServer\SensorCourier.SqlServer.csproj", "{D80413EE-0C79-4509-8C8E-8416B2DC7FEE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorCourier.Models", "src\SensorCourier.Models\SensorCourier.Models.csproj", "{6A6C515F-A9F9-4BEF-A66D-70956D4C7DB3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Migrations", "Migrations", "{2F8C03F5-FCD8-4110-A0BC-5739BB0F2307}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorCourier.MySql", "src\SensorCourier.MySql\SensorCourier.MySql.csproj", "{6FF3682B-99C5-4675-8C5C-A995B742174D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TargetDb", "TargetDb", "{47C1DAB0-213E-465B-BE9A-05727FFC5FF7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{944E2BA8-3D23-43A7-85B9-DE55C98328DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{944E2BA8-3D23-43A7-85B9-DE55C98328DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{944E2BA8-3D23-43A7-85B9-DE55C98328DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{944E2BA8-3D23-43A7-85B9-DE55C98328DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D80413EE-0C79-4509-8C8E-8416B2DC7FEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D80413EE-0C79-4509-8C8E-8416B2DC7FEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D80413EE-0C79-4509-8C8E-8416B2DC7FEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D80413EE-0C79-4509-8C8E-8416B2DC7FEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A6C515F-A9F9-4BEF-A66D-70956D4C7DB3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A6C515F-A9F9-4BEF-A66D-70956D4C7DB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A6C515F-A9F9-4BEF-A66D-70956D4C7DB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A6C515F-A9F9-4BEF-A66D-70956D4C7DB3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FF3682B-99C5-4675-8C5C-A995B742174D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FF3682B-99C5-4675-8C5C-A995B742174D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FF3682B-99C5-4675-8C5C-A995B742174D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FF3682B-99C5-4675-8C5C-A995B742174D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D80413EE-0C79-4509-8C8E-8416B2DC7FEE} = {2F8C03F5-FCD8-4110-A0BC-5739BB0F2307}
+		{6A6C515F-A9F9-4BEF-A66D-70956D4C7DB3} = {47C1DAB0-213E-465B-BE9A-05727FFC5FF7}
+		{2F8C03F5-FCD8-4110-A0BC-5739BB0F2307} = {47C1DAB0-213E-465B-BE9A-05727FFC5FF7}
+		{6FF3682B-99C5-4675-8C5C-A995B742174D} = {2F8C03F5-FCD8-4110-A0BC-5739BB0F2307}
+	EndGlobalSection
+EndGlobal
