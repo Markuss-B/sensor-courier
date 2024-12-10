@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace SensorCourier.App.Models;
 
-public class MongoSensor
+public class MongoSensorMetadatas
 {
     [BsonId]
     public string Id { get; set; }
-    [BsonElement("lastUpdated")]
-    public DateTime LastUpdated { get; set; }
-    [BsonExtraElements]
-    public BsonDocument Metadata { get; set; }
+    [BsonElement("sensorId")]
+    public string SensorId { get; set; }
+    [BsonElement("timestamp")]
+    public DateTime Timestamp { get; set; }
+    [BsonElement("metadata")]
+    public Dictionary<string, string> Metadata { get; set; }
 }

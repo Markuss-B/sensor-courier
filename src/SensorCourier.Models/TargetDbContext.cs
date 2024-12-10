@@ -11,7 +11,7 @@ public class TargetDbContext : DbContext
     }
 
     public DbSet<Sensor> Sensors { get; set; }
-    public DbSet<SensorMeasurements> SensorMeasurements { get; set; }
+    public DbSet<SensorMeasurement> SensorMeasurements { get; set; }
     public DbSet<SensorMetadata> SensorMetadata { get; set; }
     public DbSet<Parameter> Parameters { get; set; }
 

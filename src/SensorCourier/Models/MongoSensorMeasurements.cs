@@ -15,7 +15,7 @@ public class MongoSensorMeasurements
     [BsonElement("timestamp")]
     public DateTime Timestamp { get; set; }
     [BsonElement("sensorId")]
-    public required string SensorId { get; set; }
+    public string SensorId { get; set; }
     [BsonElement("measurements")]
-    public required BsonDocument Measurements { get; set; }
+    public Dictionary<string, string> Measurements { get; set; }
 }

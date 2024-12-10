@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using SensorCourier.App;
+using SensorCourier.App.Data;
+using SensorCourier.App.Services;
 using SensorCourier.Models;
 using SensorCourier.MySql.Extensions;
 using static SensorCourier.App.Provider;
@@ -38,6 +40,11 @@ builder.Services.AddDbContext<TargetDbContext>(options =>
         options.UseMySqlExtensions();
     }   
 });
+
+// Services
+builder.Services.AddScoped<ExtractionRepository>();
+builder.Services.AddScoped<LoadRepository>();
+builder.Services.AddScoped<ETLService>();
 
 builder.Services.AddHostedService<Worker>();
 

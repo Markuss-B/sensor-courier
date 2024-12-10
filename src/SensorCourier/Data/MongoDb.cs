@@ -4,7 +4,7 @@ using SensorCourier.App.Models;
 
 namespace SensorCourier.App.Data;
 
-public class MongoDb : ISensorRepository
+public class MongoDb
 {
     public MongoDb(IOptions<MongoDbSettings> options)
     {
@@ -12,24 +12,24 @@ public class MongoDb : ISensorRepository
         MongoClient client = new MongoClient(settings.ConnectionString);
         IMongoDatabase database = client.GetDatabase(settings.DatabaseName);
 
-        Sensors = database.GetCollection<MongoSensor>("sensors");
+        SensorMetadatas = database.GetCollection<MongoSensorMetadatas>("sensorMetadatas");
         SensorMeasurements = database.GetCollection<MongoSensorMeasurements>("sensorMeasurements");
     }
 
-    public IMongoCollection<MongoSensor> Sensors { get; set; }
+    public IMongoCollection<MongoSensorMetadatas> SensorMetadatas { get; set; }
     public IMongoCollection<MongoSensorMeasurements> SensorMeasurements { get; set; }
 
-    public async Task<IEnumerable<MongoSensor>> GetSensorsAsync(DateTime lastDateTime)
-    {
-        return await Sensors.Find(s => s.LastUpdated > lastDateTime)
-            .ToListAsync();
-    }
+    //public async Task<IEnumerable<MongoSensorMetadatas>> GetSensorMetadatasAsync(DateTime lastDateTime)
+    //{
+    //    return await Sensors.Find(s => s.LastUpdated > lastDateTime)
+    //        .ToListAsync();
+    //}
 
-    public async Task<IEnumerable<MongoSensorMeasurements>> GetSensorMeasurementsAsync(DateTime lastDateTime, int batchSize)
-    {
-        return await SensorMeasurements.Find(m => m.Timestamp > lastDateTime)
-            .SortBy(m => m.Timestamp)
-            .Limit(batchSize)
-            .ToListAsync();
-    }
+    //public async Task<IEnumerable<MongoSensorMeasurements>> GetSensorMeasurementsAsync(DateTime lastDateTime, int batchSize)
+    //{
+    //    return await SensorMeasurements.Find(m => m.Timestamp > lastDateTime)
+    //        .SortBy(m => m.Timestamp)
+    //        .Limit(batchSize)
+    //        .ToListAsync();
+    //}
 }

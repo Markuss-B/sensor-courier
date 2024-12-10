@@ -3,7 +3,6 @@ This project is a console application that reads sensor data from MongoDb and wr
 # Other features
 - Configurable to run batch jobs at a specified interval.
 - Can run as a console application or docker container.
-- Can be configured to monitor for changes in the source database and write to the target database instead of running batch jobs. Can be configured to do both.
 
 # Supported target databases
 - MySql
