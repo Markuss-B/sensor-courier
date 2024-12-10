@@ -6,13 +6,11 @@ namespace SensorCourier.App;
 public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
-    private readonly ParameterService _parameterService;
     private readonly IServiceProvider _serviceProvider;
 
-    public Worker(ILogger<Worker> logger, ParameterService parameterService, IServiceProvider serviceProvider)
+    public Worker(ILogger<Worker> logger, IServiceProvider serviceProvider)
     {
         _logger = logger;
-        _parameterService = parameterService;
         _serviceProvider = serviceProvider;
     }
 
@@ -27,21 +25,24 @@ public class Worker : BackgroundService
         {
             try
             {
+                // Create scope for ParameterService
+                using var scope = _serviceProvider.CreateScope();
+                var parameterService = scope.ServiceProvider.GetRequiredService<ParameterService>();
                 // Get parameters from the database: BatchDelaySeconds, BatchSize, LastDateTime and Monitor.
                 // ParameterService throws an exception if parameters cannot be loaded.
-                appSettings = _parameterService.GetAppSettings();
+                appSettings = await parameterService.GetAppSettings(stoppingToken);
+                lastMeasurementTime = await parameterService.GetLastMeasurementTimeStamp(stoppingToken);
+                lastMetadataTime = await parameterService.GetLastMetadataTimeStamp(stoppingToken);
                 batchDelaySeconds = appSettings.BatchDelaySeconds;
-                lastMeasurementTime = _parameterService.GetLastMeasurementTimeStamp();
-                lastMetadataTime = _parameterService.GetLastMetadataTimeStamp();
 
                 _logger.LogInformation("Processing data from {lastMeasurementTime} and {lastMetadataTime}.", lastMeasurementTime, lastMetadataTime);
 
-                // Create scope1 for the ETL service
+                // Create scope1 for the ETLService
                 using var scope1 = _serviceProvider.CreateScope();
                 var etlService1 = scope1.ServiceProvider.GetRequiredService<ETLService>();
                 var etlTask1 = etlService1.ExtractAndLoadMeasurements(lastMeasurementTime, appSettings.BatchSize, stoppingToken);
 
-                // Create scope2 for the ETL service
+                // Create scope2 for the ETLService
                 using var scope2 = _serviceProvider.CreateScope();
                 var etlService2 = scope2.ServiceProvider.GetRequiredService<ETLService>();
                 var etlTask2 = etlService2.ExtractAndLoadMetadatas(lastMetadataTime, appSettings.BatchSize, stoppingToken);
@@ -49,7 +50,7 @@ public class Worker : BackgroundService
                 // Wait for both ETL tasks to complete
                 await Task.WhenAll(etlTask1, etlTask2);
 
-                _logger.LogInformation("Successfully processed data.");
+                _logger.LogInformation("Data processed successfully.");
             }
             catch (Exception ex)
             {
@@ -61,4 +62,18 @@ public class Worker : BackgroundService
             await Task.Delay(TimeSpan.FromSeconds(batchDelaySeconds), stoppingToken);
         }
     }
+
+    //private async Task RunTask<T>(Func<T, Task> action)
+    //{
+    //    try
+    //    {
+    //        using var scope = _serviceProvider.CreateScope();
+    //        var service = scope.ServiceProvider.GetRequiredService<T>();
+    //        await action(service);
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        _logger.LogError(ex, "An error occurred while executing task.");
+    //    }
+    //}
 }

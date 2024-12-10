@@ -13,28 +13,26 @@ namespace SensorCourier.App.Services;
 public class ParameterService
 {
     private readonly ILogger<ParameterService> _logger;
-    private readonly IDbContextFactory<TargetDbContext> _dbContextFactory;
+    private readonly TargetDbContext _dbContext;
 
-    public ParameterService(ILogger<ParameterService> logger, IDbContextFactory<TargetDbContext> dbContextFactory)
+    public ParameterService(ILogger<ParameterService> logger, TargetDbContext targetDbContext)
     {
         _logger = logger;
-        _dbContextFactory = dbContextFactory;
+        _dbContext = targetDbContext;
     }
 
     /// <summary>
     /// Get the app settings from the database parameters table.
     /// </summary>
     /// <returns><see cref="AppSettings"/> which define app functionality.</returns>
-    public AppSettings GetAppSettings()
+    public async Task<AppSettings> GetAppSettings(CancellationToken cancellationToken)
     {
         try
         {
-            using var dbContext = _dbContextFactory.CreateDbContext();
-
             // Fetch parameters from the database
-            var parameters = dbContext.Parameters
+            var parameters = await _dbContext.Parameters
                 .Where(p => AppSettings.PropertyNames.Contains(p.Name))
-                .ToDictionary(p => p.Name, p => p.Value);
+                .ToDictionaryAsync(p => p.Name, p => p.Value, cancellationToken);
 
             _logger.LogDebug("Got parameters: {parameters}", parameters);
 
@@ -78,20 +76,19 @@ public class ParameterService
     /// Get the last measurement timestamp from the database table <see cref="SensorMeasurement"/>.
     /// </summary>
     /// <returns>DateTime of the last saved measurement, or <see cref="DateTime.MinValue"/> if the table is empty.</returns>
-    public DateTime GetLastMeasurementTimeStamp()
+    public async Task<DateTime> GetLastMeasurementTimeStamp(CancellationToken cancellationToken)
     {
         try
         {
-            using var dbContext = _dbContextFactory.CreateDbContext();
             // Check if the table is empty
-            if (!dbContext.SensorMeasurements.Any())
+            if (!await _dbContext.SensorMeasurements.AnyAsync(cancellationToken))
             {
                 _logger.LogWarning("The SensorMeasurements table is empty. Returning DateTime.MinValue.");
                 return DateTime.MinValue;
             }
 
             // Get the maximum timestamp
-            DateTime dateTime = dbContext.SensorMeasurements.Max(m => m.Timestamp);
+            DateTime dateTime = await _dbContext.SensorMeasurements.MaxAsync(m => m.Timestamp, cancellationToken);
 
             // Return the last timestamp
             return dateTime;
@@ -107,19 +104,18 @@ public class ParameterService
     /// Get the last metadata timestamp from the database table <see cref="SensorMetadata"/>.
     /// </summary>
     /// <returns>DateTime of the last saved metadata, or <see cref="DateTime.MinValue"/> if the table is empty.</returns>
-    public DateTime GetLastMetadataTimeStamp()
+    public async Task<DateTime> GetLastMetadataTimeStamp(CancellationToken cancellationToken)
     {
         try
         {
-            using var dbContext = _dbContextFactory.CreateDbContext();
             // Check if the table is empty
-            if (!dbContext.SensorMetadata.Any())
+            if (!await _dbContext.SensorMetadata.AnyAsync(cancellationToken))
             {
                 _logger.LogWarning("The SensorMetadatas table is empty. Returning DateTime.MinValue.");
                 return DateTime.MinValue;
             }
             // Get the maximum timestamp
-            DateTime dateTime = dbContext.SensorMetadata.Max(m => m.Timestamp);
+            DateTime dateTime = await _dbContext.SensorMetadata.MaxAsync(m => m.Timestamp, cancellationToken);
             // Return the last timestamp
             return dateTime;
         }

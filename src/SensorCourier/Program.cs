@@ -54,7 +54,7 @@ builder.Services.AddScoped<LoadRepository>();
 
 // Services
 builder.Services.AddScoped<ETLService>();
-builder.Services.AddSingleton<ParameterService>();
+builder.Services.AddScoped<ParameterService>();
 
 builder.Services.AddHostedService<Worker>();
 
