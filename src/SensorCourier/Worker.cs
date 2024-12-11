@@ -38,7 +38,7 @@ public class Worker : BackgroundService
                     batchDelaySeconds = appSettings.BatchDelaySeconds;
                 }
 
-                _logger.LogInformation("Starting batch of size {batchSize} processing at {time}. LastMeasurementTime: {lastMeasurementTime}, LastMetadataTime: {lastMetadataTime}", appSettings.BatchSize, DateTime.Now, lastMeasurementTime, lastMetadataTime);
+                _logger.LogInformation("Starting batch of size {batchSize} processing at {time}.", appSettings.BatchSize, DateTime.Now);
 
                 // Create scope1 for the ETLService
                 using var scope1 = _serviceProvider.CreateScope();
