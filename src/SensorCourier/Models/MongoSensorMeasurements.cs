@@ -17,5 +17,5 @@ public class MongoSensorMeasurements
     [BsonElement("sensorId")]
     public string SensorId { get; set; }
     [BsonElement("measurements")]
-    public Dictionary<string, string> Measurements { get; set; }
+    public Dictionary<string, object> Measurements { get; set; }
 }

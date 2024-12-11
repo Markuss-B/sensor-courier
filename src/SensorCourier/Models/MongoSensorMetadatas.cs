@@ -11,11 +11,11 @@ namespace SensorCourier.App.Models;
 public class MongoSensorMetadatas
 {
     [BsonId]
-    public string Id { get; set; }
+    public ObjectId Id { get; set; }
     [BsonElement("sensorId")]
     public string SensorId { get; set; }
     [BsonElement("timestamp")]
     public DateTime Timestamp { get; set; }
     [BsonElement("metadata")]
-    public Dictionary<string, string> Metadata { get; set; }
+    public Dictionary<string, object> Metadata { get; set; }
 }

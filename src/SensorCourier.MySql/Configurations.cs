@@ -19,6 +19,15 @@ namespace SensorCourier.MySql.Configurations
             //modelBuilder.Entity<SensorMetadata>()
             //    .Property(e => e.MetadataJson)
             //    .HasColumnType("JSON");
+
+            // set datetimes to be timestamp
+            //modelBuilder.Entity<SensorMeasurement>()
+            //    .Property(e => e.Timestamp)
+            //    .HasColumnType("TIMESTAMP");
+
+            //modelBuilder.Entity<SensorMetadata>()
+            //    .Property(e => e.Timestamp)
+            //    .HasColumnType("TIMESTAMP");
         }
     }
 }

@@ -34,8 +34,7 @@ public class ETLService
     /// <param name="batchSize"></param>
     public async Task ExtractAndLoadMeasurements(DateTime lastDateTime, int batchSize, CancellationToken cancellationToken)
     {
-        throw new Exception("Error in ExtractAndLoadMeasurements method");
-        _logger.LogInformation("Extracting measurements...");
+        _logger.LogDebug("Extracting measurements...");
         var measurements = await _extractionRepo.ExtractSensorMeasurements(lastDateTime, batchSize, cancellationToken);
         _logger.LogInformation("Measurements extracted. Count: {count}", measurements.Count());
 
@@ -50,10 +49,10 @@ public class ETLService
             SensorId = m.SensorId,
             Timestamp = m.Timestamp,
             MetricKey = kvp.Key,
-            MetricValue = kvp.Value
+            MetricValue = kvp.Value.ToString() ?? "failed to convert"
         }));
 
-        _logger.LogInformation("Loading measurements...");
+        _logger.LogDebug("Loading measurements...");
         await _loadRepo.LoadMeasurements(transformedMeasurements, cancellationToken);
         _logger.LogInformation("Measurements loaded.");
     }
@@ -66,8 +65,7 @@ public class ETLService
     /// <param name="batchSize"></param>
     public async Task ExtractAndLoadMetadatas(DateTime lastDateTime, int batchSize, CancellationToken cancellationToken)
     {
-        throw new Exception("Error in ExtractAndLoadMetadatas method");
-        _logger.LogInformation("Extracting metadatas...");
+        _logger.LogDebug("Extracting metadatas...");
         IEnumerable<MongoSensorMetadatas> metadatas = await _extractionRepo.ExtractSensorMetadatas(lastDateTime, batchSize, cancellationToken);
 
         _logger.LogInformation("Metadatas extracted. Count: {count}", metadatas.Count());
@@ -82,10 +80,10 @@ public class ETLService
             SensorId = m.SensorId,
             Timestamp = m.Timestamp,
             MetaKey = kvp.Key,
-            MetaValue = kvp.Value
+            MetaValue = kvp.Value.ToString() ?? "failed to convert"
         }));
 
-        _logger.LogInformation("Loading metadatas...");
+        _logger.LogDebug("Loading metadatas...");
 
         await _loadRepo.LoadMetadatas(transformedMetadatas, cancellationToken);
 

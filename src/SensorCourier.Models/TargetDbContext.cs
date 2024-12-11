@@ -44,4 +44,16 @@ public class TargetDbContext : DbContext
 
         await db.SaveChangesAsync();
     }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        // specify datetime kind as UTC
+        modelBuilder.Entity<SensorMeasurement>()
+            .Property(e => e.Timestamp)
+            .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+        modelBuilder.Entity<SensorMetadata>()
+            .Property(e => e.Timestamp)
+            .HasConversion(v => v, v => DateTime.SpecifyKind(v, DateTimeKind.Utc));
+
+    }
 }

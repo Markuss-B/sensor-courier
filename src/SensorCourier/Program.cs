@@ -6,7 +6,10 @@ using SensorCourier.App.Services;
 using SensorCourier.Models;
 using SensorCourier.MySql.Extensions;
 using SensorCourier.SqlServer.Extensions;
+using System.Globalization;
 using static SensorCourier.App.Provider;
+
+CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
 
 var builder = Host.CreateApplicationBuilder(args);
 
@@ -71,9 +74,6 @@ try
     logger.LogInformation("Attempting to connect to the database.");
 
     var db = services.GetRequiredService<TargetDbContext>();
-    await db.Database.OpenConnectionAsync();
-    logger.LogInformation("Successfully connected to the database.");
-    await db.Database.CloseConnectionAsync();
 
     await TargetDbContext.InitializeAsync(db, logger);
 

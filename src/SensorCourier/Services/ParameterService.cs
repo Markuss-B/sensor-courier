@@ -90,7 +90,6 @@ public class ParameterService
             // Get the maximum timestamp
             DateTime dateTime = await _dbContext.SensorMeasurements.MaxAsync(m => m.Timestamp, cancellationToken);
 
-            // Return the last timestamp
             return dateTime;
         }
         catch (Exception ex)
@@ -116,7 +115,7 @@ public class ParameterService
             }
             // Get the maximum timestamp
             DateTime dateTime = await _dbContext.SensorMetadata.MaxAsync(m => m.Timestamp, cancellationToken);
-            // Return the last timestamp
+
             return dateTime;
         }
         catch (Exception ex)
@@ -125,5 +124,4 @@ public class ParameterService
             throw new Exception("Failed to retrieve the last metadata timestamp.", ex);
         }
     }
-
 }
