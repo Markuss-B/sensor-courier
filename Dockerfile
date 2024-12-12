@@ -10,19 +10,22 @@ WORKDIR /app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["SensorCourier/SensorCourier.csproj", "SensorCourier/"]
-RUN dotnet restore "./SensorCourier/SensorCourier.csproj"
-COPY . .
-WORKDIR "/src/SensorCourier"
-RUN dotnet build "./SensorCourier.csproj" -c $BUILD_CONFIGURATION -o /app/build
+COPY ["./src/SensorCourier/SensorCourier.App.csproj", "SensorCourier/"]
+COPY ["./src/SensorCourier.Models/SensorCourier.Models.csproj", "SensorCourier.Models/"]
+COPY ["./src/SensorCourier.SqlServer/SensorCourier.SqlServer.csproj", "SensorCourier.SqlServer/"]
+COPY ["./src/SensorCourier.MySql/SensorCourier.MySql.csproj", "SensorCourier.MySql/"]
+RUN dotnet restore "./SensorCourier/SensorCourier.App.csproj"
+COPY ./src .
+WORKDIR "/src"
+RUN dotnet build "./SensorCourier/SensorCourier.App.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./SensorCourier.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./SensorCourier/SensorCourier.App.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "SensorCourier.dll"]
+ENTRYPOINT ["dotnet", "SensorCourier.App.dll"]

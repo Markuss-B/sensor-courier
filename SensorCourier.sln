@@ -15,6 +15,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorCourier.MySql", "src\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TargetDb", "TargetDb", "{47C1DAB0-213E-465B-BE9A-05727FFC5FF7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{46F0F6AD-31D0-4012-A772-079881530215}"
+	ProjectSection(SolutionItems) = preProject
+		.build\compose.yaml = .build\compose.yaml
+		.build\README.md = .build\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F1BBED5B-AEC1-452C-B34F-63AE8EBB1F90}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		Dockerfile = Dockerfile
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

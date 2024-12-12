@@ -1,0 +1,22 @@
+name: sensor
+
+services:
+  sensor-courier-dev:
+    image: sensor-courier-dev
+    networks:
+      - sensor-network
+      - maria_sql-network
+    container_name: sensor-courier-dev
+    environment:
+      MongoDbSettings__ConnectionString: mongodb://sensor-mongo-dev:27017/?directConnection=true
+      MongoDbSettings__DatabaseName: sensor-dev
+      Provider: MySql
+      # Provider: SqlServer
+      ConnectionStrings__MySql: Server=mariadb;Database=SensorCourier;User=root;Password=password;
+      # ConnectionStrings__SqlServer: Server=(LocalDb)\\MSSQLLocalDB;Database=SensorCourier;Trusted_Connection=True;TrustServerCertificate=True
+
+networks:
+  sensor-network:
+    external: true
+  maria_sql-network:
+    external: true  
