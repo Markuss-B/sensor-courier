@@ -23,7 +23,7 @@ public class TargetDbContext : DbContext
         var pendingMigrations = await db.Database.GetPendingMigrationsAsync();
         if (pendingMigrations.Any())
         {
-            logger.LogInformation($"Applying migrations: {string.Join(", ", pendingMigrations)}");
+            logger.LogInformation("Applying migrations: {Migrations}.", string.Join(", ", pendingMigrations));
             await db.Database.MigrateAsync();
         }
         else
