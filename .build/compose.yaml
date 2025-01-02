@@ -2,7 +2,7 @@ name: sensor
 
 services:
   sensor-courier-dev:
-    image: sensor-courier-dev
+    build: ../  
     networks:
       - sensor-network
       - maria_sql-network
