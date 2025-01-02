@@ -25,7 +25,7 @@ var config = new ConfigurationBuilder()
 builder.Services.AddDbContext<TargetDbContext>(options =>
 {
     var provider = config.GetValue("Provider", SqlServer.Name);
-    
+
     // SqlServer
     if (provider == SqlServer.Name)
     {
@@ -44,7 +44,7 @@ builder.Services.AddDbContext<TargetDbContext>(options =>
             x => x.MigrationsAssembly(MySql.Assembly)
         );
         options.UseMySqlExtensions();
-    }   
+    }
 });
 
 //MongoDb

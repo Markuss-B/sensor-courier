@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using SensorCourier.Models;
 
 namespace SensorCourier.SqlServer.Configurations
 {

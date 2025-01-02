@@ -1,12 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using SensorCourier.App.Models;
 using SensorCourier.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SensorCourier.App.Services;
 
@@ -56,7 +50,7 @@ public class ParameterService
                 }
             }
 
-            if(!appSettings.IsSet())
+            if (!appSettings.IsSet())
             {
                 _logger.LogError("App settings are not set.");
                 throw new InvalidOperationException("App settings are not set.");

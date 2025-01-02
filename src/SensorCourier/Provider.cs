@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SensorCourier.App;
+﻿namespace SensorCourier.App;
 
 public record Provider(string Name, string Assembly)
 {

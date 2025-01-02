@@ -50,7 +50,7 @@ public class Worker : BackgroundService
                 var etlService2 = scope2.ServiceProvider.GetRequiredService<ETLService>();
                 var etlTask2 = etlService2.ExtractAndLoadMetadatas(lastMetadataTime, appSettings.BatchSize, stoppingToken);
 
-                tasks = new[] {etlTask1, etlTask2};
+                tasks = new[] { etlTask1, etlTask2 };
                 // Wait for both ETL tasks to complete
                 await Task.WhenAll(etlTask1, etlTask2);
 
