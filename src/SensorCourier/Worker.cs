@@ -3,6 +3,9 @@ using SensorCourier.App.Services;
 
 namespace SensorCourier.App;
 
+/// <summary>
+/// Manages the ETL process.
+/// </summary>
 public class Worker : BackgroundService
 {
     private readonly ILogger<Worker> _logger;
@@ -17,13 +20,13 @@ public class Worker : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         AppSettings appSettings;
-        double batchDelaySeconds = 100;
+        double batchDelaySeconds = 100; // initial value incase of error
         DateTime lastMeasurementTime;
         DateTime lastMetadataTime;
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            Task[] tasks = null;
+            Task[] tasks = null; // stores the ETL tasks
             try
             {
                 // Create scope for ParameterService
