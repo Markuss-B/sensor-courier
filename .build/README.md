@@ -20,6 +20,9 @@ In parameters table set:
 BatchDelaySeconds (default 60)
 BatchSize (default 10)
 
+## MariaDB
+Check the MariaDb folder for MariaDb container.
+
 ## If you want an image file 
 Save image in tar file
 ```
