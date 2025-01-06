@@ -1,5 +1,7 @@
 # SensorCourier
 
+Extracts sensor data from MongoDB and loads it in to SQL database.
+
 ## Part of Sensor Monitoring System
 - [sensor-consumer](https://github.com/Markuss-B/sensor-consumer)
 - [sensor-webapi](https://github.com/Markuss-B/sensor-webapi)
