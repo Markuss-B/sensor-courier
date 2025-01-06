@@ -7,7 +7,8 @@ namespace SensorCourier.SqlServer.Configurations
         /// <summary>
         /// Configure the model builder for the SqlServer database.
         /// Enables automatic migration creation for SqlServer to use SqlServer specific models.
-        /// Currently SqlServer server uses NVARCHAR(MAX) for JSON columns.
+        /// Currently not used.
+        /// Could be used to set specific column types for SQL Server so that the migration generator creates the correct column types.
         /// </summary>
         /// <param name="modelBuilder"></param>
         public static void ConfigureModelBuilder(ModelBuilder modelBuilder)

@@ -17,6 +17,9 @@ public class Worker : BackgroundService
         _serviceProvider = serviceProvider;
     }
 
+    /// <summary>
+    /// Executes the ETL process. Starts by loading parameters from the database and then calls the ETLService to extract and load data.
+    /// </summary>
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         AppSettings appSettings;

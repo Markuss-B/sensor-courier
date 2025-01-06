@@ -11,7 +11,13 @@ public class SensorMetadata
     public DateTime Timestamp { get; set; }
     [MaxLength(100)]
     public string SensorId { get; set; }
+    /// <summary>
+    /// Metadata name
+    /// </summary>
     [MaxLength(100)]
     public string MetaKey { get; set; }
+    /// <summary>
+    /// Metadata value
+    /// </summary>
     public string MetaValue { get; set; }
 }
