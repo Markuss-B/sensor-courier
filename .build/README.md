@@ -1,11 +1,9 @@
 # To run with docker compose
 
-Build image in sensor-consumer project main directory.
-```
-docker build -t sensor-courier-dev .
-```
 Modify the `compose.yaml` file to set mongo connectionstring and target db connectionstring and provider.
 Provider can be MySql, SqlServer.
+
+By default uses the MariaDb database
 
 Run the docker compose file in the main directory.
 ```
